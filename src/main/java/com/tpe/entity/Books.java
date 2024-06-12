@@ -7,6 +7,4 @@ import javax.persistence.Id;
 @Entity
 public class Books {
 
-    @Id
-    Long id;
 }
