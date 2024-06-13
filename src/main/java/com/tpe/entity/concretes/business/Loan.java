@@ -1,5 +1,6 @@
-package com.tpe.entity;
+package com.tpe.entity.concretes.business;
 
+import com.tpe.entity.concretes.user.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -8,7 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -33,15 +34,8 @@ public class Loan {
     private Book book;
 
     @Column(name = "loan_date", nullable = false)
-    private LocalDateTime loanDate;
-
-    @Column(name = "expire_date", nullable = false)
-    private LocalDateTime expireDate;
+    private LocalDate loanDate;
 
     @Column(name = "return_date")
-    private LocalDateTime returnDate;
-
-    @Column(name = "notes", length = 300)
-    private String notes;
-
+    private LocalDate returnDate;
 }

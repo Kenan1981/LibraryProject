@@ -1,4 +1,4 @@
-package com.tpe.entity;
+package com.tpe.entity.concretes.business;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,17 +27,23 @@ public class Book {
     @Column(name = "title", nullable = false, length = 200)
     private String title;
 
-    @Column(name = "author", nullable = false, length = 100)
-    private String author;
-
-    @Column(name = "isbn", nullable = false, unique = true, length = 13)
+    @Column(name = "isbn", nullable = false, unique = true, length = 20)
     private String isbn;
 
-    @Column(name = "published_year", nullable = false)
-    private int publishedYear;
+    @Column(name = "publish_year")
+    private int publishYear;
 
-    @Column(name = "publisher", length = 100)
-    private String publisher;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id", nullable = false)
+    private Author author;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "publisher_id", nullable = false)
+    private Publisher publisher;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Loan> loans;
