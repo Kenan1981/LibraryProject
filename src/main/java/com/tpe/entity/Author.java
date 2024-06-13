@@ -26,11 +26,16 @@ public class Author {
 
     @NotNull(message = "Author name can not be null")
     @NotBlank(message = "Author name can not be white space")
-    @Size(min = 4, max=70, message = "Name '${valudatedValue}' must be between {min} and {max} chars")
+    @Size(min = 4, max=70, message = "Author name '${valudatedValue}' must be between {min} and {max} chars")
     @Column(nullable = false, length = 70)
     private String name;
 
     @Column(nullable = false)
     @NotNull
     private Boolean builtIn=false;
+
+
+    private int deneme;
+
+
 }
