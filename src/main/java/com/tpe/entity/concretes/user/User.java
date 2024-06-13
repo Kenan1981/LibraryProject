@@ -1,7 +1,8 @@
 package com.tpe.entity.concretes.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tpe.entity.concretes.business.Loan;
-import com.tpe.entity.concretes.user.UserRole;
+import com.tpe.entity.concretes.business.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -96,8 +97,16 @@ private Long id;
     private List<Loan> loans;
 
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<UserRole> userRoles;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name ="user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> role;
+
+
 
 
 }
