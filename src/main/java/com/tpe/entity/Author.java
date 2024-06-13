@@ -34,7 +34,6 @@ public class Author {
     @NotNull
     private Boolean builtIn=false;
 
-    private int deneme123;
 
 
 
