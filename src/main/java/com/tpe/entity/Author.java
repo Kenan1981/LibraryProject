@@ -35,7 +35,7 @@ public class Author {
     private Boolean builtIn=false;
 
 
-    private int deneme;
+
 
 
 }
