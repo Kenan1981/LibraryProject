@@ -60,7 +60,7 @@ public class User {
     @NotNull
     private LocalDateTime createDate;
 
-    private String resetPasswordCode; // Bu alan hashlenmiş olabilir
+    private String resetPasswordCode; // Bu alan hashlenmiş olmalıdır
 
     @NotNull
     private Boolean builtIn = false;
