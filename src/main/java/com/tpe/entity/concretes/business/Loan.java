@@ -17,8 +17,7 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Table(name = "loans")
-@EqualsAndHashCode(of = "id")
-@ToString
+
 public class Loan {
 
     @Id

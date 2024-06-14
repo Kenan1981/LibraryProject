@@ -1,6 +1,7 @@
 package com.tpe.entity.concretes.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tpe.entity.concretes.business.Loan;
 import com.tpe.entity.concretes.business.Role;
 import lombok.Data;
@@ -22,33 +23,12 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @EqualsAndHashCode(of = "id")
-
 public class User {
 
-/*    @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", nullable = false, unique = true, length = 50)
-    private String username;
-
-    @Column(name = "password", nullable = false, length = 100)
-    private String password;
-
-    @Column(name = "email", nullable = false, unique = true, length = 100)
-    private String email;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<UserRole> roles;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Loan> loans;*/
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
     @Column(name = "username", nullable = false, unique = true, length = 50)
     private String username;
 
@@ -85,8 +65,6 @@ private Long id;
     @NotNull
     private String password; // Bu alan şifrelenmiş (hashed) olmalıdır
 
-
-
     @NotNull
     private LocalDateTime createDate;
 
@@ -98,17 +76,9 @@ private Long id;
     @OneToMany(mappedBy = "user")
     private List<Loan> loans;
 
-
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-            name ="user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @OneToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Role role;
-
-
 
 
 }
