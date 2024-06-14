@@ -4,7 +4,6 @@ package com.tpe.security.service;
 import com.tpe.entity.concretes.user.User;
 import com.tpe.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,12 +25,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(user != null){
             return new UserDetailsImpl(
                     user.getId(),
-                    user.getEmail(),
+                    user.getUsername(),
                     user.getFirstName(),
                     user.getLastName(),
                     user.getPassword(),
-                    user.getRole().getRoleType().name()
-                   );
+                    user.getRole().getRoleType().name
+            );
         }
         throw new UsernameNotFoundException("User' " + username + " not found");
     }

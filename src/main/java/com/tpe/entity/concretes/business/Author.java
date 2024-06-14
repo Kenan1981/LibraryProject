@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
+
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "authors")
 @EqualsAndHashCode(of = "id")
-@ToString
+
 public class Author {
 
     @Id
