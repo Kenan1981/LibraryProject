@@ -79,4 +79,5 @@ public class User {
     @OneToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Role role;
+
 }
