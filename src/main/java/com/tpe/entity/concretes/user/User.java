@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
@@ -24,7 +22,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @EqualsAndHashCode(of = "id")
-@ToString
+
 public class User {
 
 /*    @Id
@@ -51,6 +49,8 @@ public class User {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
+    @Column(name = "username", nullable = false, unique = true, length = 50)
+    private String username;
 
     @NotNull
     @Size(min = 2, max = 30)
@@ -85,6 +85,8 @@ private Long id;
     @NotNull
     private String password; // Bu alan şifrelenmiş (hashed) olmalıdır
 
+
+
     @NotNull
     private LocalDateTime createDate;
 
@@ -104,7 +106,7 @@ private Long id;
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Role> role;
+    private Role role;
 
 
 
