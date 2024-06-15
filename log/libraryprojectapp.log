@@ -1861,4 +1861,28 @@ Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'ba
 ""2024-06-14 23:32:36,377 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean:Closing JPA EntityManagerFactory for persistence unit 'default'
 ""2024-06-14 23:32:36,380 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource:HikariPool-1 - Shutdown initiated...
 ""2024-06-14 23:32:36,385 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource:HikariPool-1 - Shutdown completed.
+""2024-06-15 21:05:40,499 INFO  [main] com.tpe.LibrayProjectApplication:Starting LibrayProjectApplication using Java 17.0.9 on Kenan-UYANIK with PID 11228 (C:\Users\Kenan\IdeaProjects\LibraryProject\target\classes started by Kenan in C:\Users\Kenan\IdeaProjects\LibraryProject)
+""2024-06-15 21:05:40,507 INFO  [main] com.tpe.LibrayProjectApplication:No active profile set, falling back to 1 default profile: "default"
+""2024-06-15 21:05:42,708 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate:Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+""2024-06-15 21:05:42,890 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate:Finished Spring Data repository scanning in 149 ms. Found 3 JPA repository interfaces.
+""2024-06-15 21:05:44,698 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer:Tomcat initialized with port(s): 8080 (http)
+""2024-06-15 21:05:44,731 INFO  [main] org.apache.catalina.core.StandardService:Starting service [Tomcat]
+""2024-06-15 21:05:44,732 INFO  [main] org.apache.catalina.core.StandardEngine:Starting Servlet engine: [Apache Tomcat/9.0.68]
+""2024-06-15 21:05:45,028 INFO  [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]:Initializing Spring embedded WebApplicationContext
+""2024-06-15 21:05:45,029 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext:Root WebApplicationContext: initialization completed in 4423 ms
+""2024-06-15 21:05:45,480 INFO  [main] org.hibernate.jpa.internal.util.LogHelper:HHH000204: Processing PersistenceUnitInfo [name: default]
+""2024-06-15 21:05:45,630 INFO  [main] org.hibernate.Version:HHH000412: Hibernate ORM core version 5.6.12.Final
+""2024-06-15 21:05:46,145 INFO  [main] org.hibernate.annotations.common.Version:HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+""2024-06-15 21:05:46,393 INFO  [main] com.zaxxer.hikari.HikariDataSource:HikariPool-1 - Starting...
+""2024-06-15 21:05:46,832 INFO  [main] com.zaxxer.hikari.HikariDataSource:HikariPool-1 - Start completed.
+""2024-06-15 21:05:46,874 INFO  [main] org.hibernate.dialect.Dialect:HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+""2024-06-15 21:05:48,797 INFO  [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator:HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+""2024-06-15 21:05:48,813 INFO  [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean:Initialized JPA EntityManagerFactory for persistence unit 'default'
+""2024-06-15 21:05:50,444 WARN  [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration:spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+""2024-06-15 21:05:51,802 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain:Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@51a5a8ba, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@16eb93af, org.springframework.security.web.context.SecurityContextPersistenceFilter@4db4431b, org.springframework.security.web.header.HeaderWriterFilter@21948bd1, org.springframework.web.filter.CorsFilter@404566e7, org.springframework.security.web.authentication.logout.LogoutFilter@4bac0be5, com.tpe.security.jwt.AuthTokenFilter@23e0c200, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@ab94a32, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@70273633, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3ed87b6e, org.springframework.security.web.session.SessionManagementFilter@458b4487, org.springframework.security.web.access.ExceptionTranslationFilter@af96ac9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1f86f7da]
+""2024-06-15 21:05:52,443 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer:Tomcat started on port(s): 8080 (http) with context path ''
+""2024-06-15 21:05:52,465 INFO  [main] com.tpe.LibrayProjectApplication:Started LibrayProjectApplication in 12.984 seconds (JVM running for 14.091)
+""2024-06-15 21:21:31,568 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean:Closing JPA EntityManagerFactory for persistence unit 'default'
+""2024-06-15 21:21:31,572 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource:HikariPool-1 - Shutdown initiated...
+""2024-06-15 21:21:31,576 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource:HikariPool-1 - Shutdown completed.
 "
