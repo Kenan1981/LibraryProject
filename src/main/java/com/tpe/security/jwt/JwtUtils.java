@@ -2,6 +2,7 @@ package com.tpe.security.jwt;
 
 import com.tpe.security.service.UserDetailsImpl;
 import io.jsonwebtoken.*;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,59 +11,75 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+
 @Component
-public class JwtUtils {
+@Slf4j
+public class JwtUtils
+{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtils.class); // Odev : @Slf4j
+   private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${backendapi.app.jwtExpirationMs}")
+   @Value("${backendapi.app.jwtSecret}")
+   private String jwtSecret;
+
+   @Value("${backendapi.app.jwtExpirationMs}")
     private long jwtExpirationMs;
 
-    @Value("${backendapi.app.jwtSecret}")
-    private String jwtSecret;
 
-    // Generate JWT
-    public String generateJwtToken(Authentication authentication){
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        return generateTokenFromUsername(userDetails.getUsername());
+
+  /* public void someMethod() {
+       log.info("this is an error");
+   }*/
+    //generate jwt
+    public String generateJwtToken(Authentication authentication)
+    {
+      UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal(); //It gives  successfully logg in user.
+
+        return generateToken(userDetails.getUsername());
+
     }
-
-    public String generateTokenFromUsername(String username){
+    //creating valid jwt token
+    public String generateToken(String email)
+    {
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .setExpiration(new Date(new Date().getTime()+jwtExpirationMs))
+                .signWith(SignatureAlgorithm.HS512,jwtSecret)
                 .compact();
     }
 
-    // Validate JWT
-    public boolean validateJwtToken(String jwtToken){
+
+    //validate jwt
+    public boolean validateJwtToken(String jwtToken)
+    {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwtToken);
             return true;
         } catch (ExpiredJwtException e) {
-            LOGGER.error("Jwt token is expired : {}", e.getMessage());
+           LOGGER.error("Jwt token is expired : {}",e.getMessage());
         } catch (UnsupportedJwtException e) {
-            LOGGER.error("Jwt token is unsupported : {}", e.getMessage());
+            LOGGER.error("Jwt token is unsupported : {}",e.getMessage());
         } catch (MalformedJwtException e) {
-            LOGGER.error("Jwt token is invalid : {}", e.getMessage());
+            LOGGER.error("Jwt token is invalid : {}",e.getMessage());
         } catch (SignatureException e) {
-            LOGGER.error("Jwt token is invalid : {}", e.getMessage());
+            LOGGER.error("Jwt token signature is invalid : {}",e.getMessage());
         } catch (IllegalArgumentException e) {
-            LOGGER.error("Jwt is empty : {}", e.getMessage());
+            LOGGER.error("Jwt token is empty : {}",e.getMessage());
         }
-        return  false;
+        return false;
     }
 
-    // getUsernameFromJWT
-    public String getUsernameFromJwtToken(String token){
-
+    // getUsernameFrom jwt
+    public String  getUsernameFromToken(String token)
+    {
         return Jwts.parser()
                 .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+                .getBody().getSubject();
     }
+
+
+
 }
