@@ -1,5 +1,6 @@
 package com.tpe.security.config;
 
+
 import com.tpe.security.jwt.AuthTokenFilter;
 import com.tpe.security.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +20,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 @EnableWebSecurity
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
-public class WebSecurityConfig {
-
+public class WebSecurityConfig
+{
     private final UserDetailsServiceImpl userDetailsService;
 
     @Bean
@@ -34,62 +34,76 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
+    {
         http.cors().and()
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers(AUTH_WHITE_LIST).permitAll()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers(AUTH_WHITE_LIST).permitAll()
                 .anyRequest().authenticated();
 
-        http.headers().frameOptions().sameOrigin(); // ClickJacking tarzi saldirilari onlemek icin yazildi
+        //for Click Jacking attack
+        http.headers().frameOptions().sameOrigin();
+
+        //provider
         http.authenticationProvider(authenticationProvider());
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        //filter
+        http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
     @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter(){
+    public AuthTokenFilter authenticationTokenFilter()
+    {
         return new AuthTokenFilter();
     }
 
+
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder()
+    {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider()
+    {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+
         authenticationProvider.setUserDetailsService(userDetailsService);
+
         authenticationProvider.setPasswordEncoder(passwordEncoder());
+
+
         return authenticationProvider;
 
     }
 
     @Bean
-    public WebMvcConfigurer corsConfigurer(){
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
+    public WebMvcConfigurer corsConfigurer()
+    {
+      return  new WebMvcConfigurer() {
 
-                // uygulamamıza gelen her isteğe bu ayarlar uygulanır.
-                registry.addMapping("/**")
-                        // tüm kaynaklara (farklı sunuculara veya domainlere) isteğe
-                        // izin verildiğini belirtir. Yani, başka bir sunucudan gelen
-                        // isteklere izin verilir.
-                        .allowedOrigins("*")
-                        // gelen isteklerdeki başlıklar (örneğin, Authorization
-                        // veya Content-Type) herhangi bir sınırlama olmadan kabul edilir.
-                        .allowedHeaders("*")
-                        // tüm HTTP metotlarına (GET, POST, PUT, DELETE vb.) isteğe izin verilir.
-                        .allowedMethods("*");
-            }
-        };
+
+          public void addCorsMapping(CorsRegistry registry)
+          {
+              registry.addMapping("/**")
+                      .allowedOrigins("*")
+                      .allowedHeaders("*")
+                      .allowedMethods("*");
+          }
+      };
+
+
     }
 
 
-    private static final String[] AUTH_WHITE_LIST = {
+    private static final String[] AUTH_WHITE_LIST =          {
             "/",
             "/v3/api-docs/**",
             "swagger-ui.html",
@@ -110,4 +124,31 @@ public class WebSecurityConfig {
             "/categories/id"
     };
 
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

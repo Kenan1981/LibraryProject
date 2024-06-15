@@ -1,37 +1,33 @@
 package com.tpe.security.service;
 
-
 import com.tpe.entity.concretes.user.User;
+
 import com.tpe.repository.UserRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
-
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        User user = userRepository.findByUsernameEquals(username);
-
-        if(user != null){
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
             return new UserDetailsImpl(
                     user.getId(),
-                    user.getUsername(),
-                    user.getFirstName(),
-                    user.getLastName(),
+                    user.getEmail(),
                     user.getPassword(),
-                    user.getRole().getRoleType().name
-            );
-        }
-        throw new UsernameNotFoundException("User' " + username + " not found");
+                    user.getRole().getRoleType().getName()
+                    );
+        } throw new UsernameNotFoundException("user email ' = " + email + " not found");
+
+
     }
 }
