@@ -9,9 +9,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+import java.util.List;
 
 @Entity
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,13 +27,18 @@ public class Role {
     private String name;
 
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name ="user_roles",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> user;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private RoleType roleType;
-
-
-
 
 
 }
