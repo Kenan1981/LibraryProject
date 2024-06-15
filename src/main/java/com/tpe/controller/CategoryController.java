@@ -1,12 +1,11 @@
 package com.tpe.controller;
 
+import com.tpe.payload.response.CategoryResponse;
+import com.tpe.payload.response.ResponseMessage;
 import com.tpe.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/categories")
@@ -17,7 +16,7 @@ public class CategoryController {
 
 
     @GetMapping // http://localhost:8080/categories
-    public Page<> getAll(
+    public Page<CategoryResponse> getAll(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "20") int size,
             @RequestParam(value = "sort", defaultValue = "name") String sort,
@@ -26,5 +25,11 @@ public class CategoryController {
         return categoryService.getAll(page,size,sort,type);
     }
 
+
+    @GetMapping("/{id}")
+    public CategoryResponse getById(@PathVariable Long id){
+        return categoryService.getById(id);
+
+    }
 
 }
