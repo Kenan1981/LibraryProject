@@ -1,36 +1,93 @@
 package com.tpe.entity.concretes.business;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.io.File;
+import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @Entity
-@Table(name = "books")
+@Table(name = "t_books")
 @EqualsAndHashCode(of = "id")
 public class Book {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title", nullable = false, length = 200)
-    private String title;
+    @NotNull
+    @Size(min = 2, max = 80)
+    private String name;
 
-    @Column(name = "isbn", nullable = false, unique = true, length = 20)
+
+    @NotNull
+    @Size(min = 17, max = 17)
+    @Pattern(regexp = "\\d{3}-\\d{2}-\\d{5}-\\d{2}-\\d", message = "Invalid ISBN format. Correct format: 999-99-99999-99")
     private String isbn;
 
-    @Column(name = "publish_year")
-    private int publishYear;
+
+    @Column(name = "page_count", nullable = true)
+    private int pageCount;
+
+
+    @Column(name = "authors_id")
+    @NotNull
+    private Long authorId;
+
+
+    @Column(name="publishers_id")
+    @NotNull
+    private Long publisherId;
+
+
+    @Column(name = "publish_date", nullable = true) //?
+    @Min(value = 1000, message = "Publish year must be greater than or equal to 1000")
+    @Max(value = 9999, message = "Publish year must be less than or equal to 9999")
+    private int publishDate;
+
+
+    @Column(name="categories_id")
+    @NotNull
+    private Long categoryId;
+
+
+    @Column(nullable = true)
+    private File image;   //bunu ilk defa görüyruz
+
+
+    @NotNull
+    private boolean loanable=true;
+
+
+    @Column(name = "shelf_code", nullable = false, length = 6)
+    @NotNull
+    @Pattern(regexp = "[A-Z]{2}-\\d{3}", message = "Invalid shelf code format. Correct format: AA-999")
+    private String shelfCode;
+
+
+    @NotNull
+    private boolean active=true;
+
+
+    @NotNull
+    private boolean featured=false;
+
+
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd, HH:mm:ss")
+    private LocalDateTime createDate; //? dogru mu
+
+
+    @NotNull
+    private boolean builtIn=false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
@@ -46,4 +103,6 @@ public class Book {
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Loan> loans;
+
+
 }
