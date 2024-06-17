@@ -25,7 +25,7 @@ public class Book {
 
     @NotNull
     @Size(min = 2, max = 80)
-    private String name;
+    private String bookName;
 
 
     @NotNull
@@ -91,15 +91,15 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
-    private Author author;
+    private Author authorName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    private Category categoryName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id", nullable = false)
-    private Publisher publisher;
+    private Publisher publisherName;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Loan> loans;
