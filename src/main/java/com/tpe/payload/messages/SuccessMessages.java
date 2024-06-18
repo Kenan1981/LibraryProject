@@ -3,9 +3,9 @@ package com.tpe.payload.messages;
 public class SuccessMessages {
 
     // --  SEFA
-    //public static final String NOT_FOUND_CATEGORY_MESSAGE = "Error: Category not found with id %s";
-
-
+    public static final String CATEGORY_SAVE = "Category is saved Successfully";
+    public static final String CATEGORY_UPDATE = "Category is updated Successfully";
+    public static final String CATEGORY_DELETE = "Category is deleted Successfully";
 
 
 
