@@ -45,15 +45,15 @@ public class CategoryController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN')") // http://localhost:8080/categories/1 + PUT
-    public ResponseMessage<CategoryResponse> update(@PathVariable Long categoryId,
+    public ResponseMessage<CategoryResponse> update(@PathVariable Long id,
                                                     @RequestBody @Valid CategoryRequest categoryRequest){
-        return categoryService.updateCategory(categoryId, categoryRequest);
+        return categoryService.updateCategory(id, categoryRequest);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN')") // http://localhost:8080/categories/1 + DELETE
-    public ResponseMessage<?> deleteById(@PathVariable Long categoryId){
-        return categoryService.deleteById(categoryId);
+    public ResponseMessage<?> deleteById(@PathVariable Long id){
+        return categoryService.deleteById(id);
     }
 
 
