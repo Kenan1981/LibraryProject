@@ -65,7 +65,7 @@ public class CategoryService {
 
     //yrd method
     private boolean isCategoryExistByCategoryName(String categoryName){
-        boolean lessonExist =  categoryRepository.existsCategoryByCategoryNameEqualsIgnoreCase(categoryName);
+        boolean lessonExist =  categoryRepository.existsByNameIgnoreCase(categoryName);
 
         if(lessonExist){
             throw new ConflictException(String.format(ErrorMessages.CATEGORY_ALREADY_EXIST_WITH_CATEGORY_NAME, categoryName));
@@ -76,7 +76,7 @@ public class CategoryService {
         Category category = isCategoryExist(categoryId);
         if(
                 !(category.getName().equals(categoryRequest.getCategoryName())) &&
-                        (categoryRepository.existsCategoryByCategoryNameEqualsIgnoreCase(categoryRequest.getCategoryName()))
+                        (categoryRepository.existsByNameIgnoreCase(categoryRequest.getCategoryName()))
         ){
             throw new ConflictException(String.format(ErrorMessages.CATEGORY_ALREADY_EXIST_WITH_CATEGORY_NAME
                     , categoryRequest.getCategoryName()));
@@ -94,7 +94,7 @@ public class CategoryService {
 
     public ResponseMessage<?> deleteById(Long categoryId) {
         Category category = isCategoryExist(categoryId);
-        boolean hasBooks = categoryRepository.existsBooksByCategoryId(categoryId);
+        boolean hasBooks = bookRepository.existsByCategory_Id(categoryId);
 
         if (hasBooks){
             throw new RuntimeException(String.format(ErrorMessages.CATEGORY_HAS_BOOKS));
