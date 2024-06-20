@@ -1,4 +1,4 @@
-package com.tpe.entity.concretes.business;
+package com.tpe.entity.concretes.business; // checked
 
 import lombok.*;
 
@@ -33,7 +33,7 @@ public class Category {
     @NotNull(message = "sequence must not be empty")
     private int sequence;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     private List<Book> books;
 
 

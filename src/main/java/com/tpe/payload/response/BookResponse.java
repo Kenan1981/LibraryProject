@@ -10,23 +10,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder(toBuilder = true)
+@Builder
+
 public class BookResponse {
 
 
 
-    private Long id;
+    private Long bookId;
 
-    private String bookName;
+    private String name;
 
     private String isbn;
 
@@ -40,7 +38,7 @@ public class BookResponse {
 
     private Long categoryId;
 
-    private File image;   //bunu ilk defa görüyruz
+    private String imageUrl;   // private File image;   //bunu ilk defa görüyruz //  // File yerine String URL
 
     private boolean loanable=true;
 
@@ -50,17 +48,22 @@ public class BookResponse {
 
     private boolean featured=false;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss") //sonradan eklendi chat!!
     private LocalDateTime createDate; //? dogru mu
 
     //  private boolean builtIn=false;
 
-    private Author authorName;
+    private Author author;
 
-    private Category categoryName;
+    private Category category;
 
-    private Publisher publisherName;
+    private Publisher publisher;
 
     private List<Loan> loans;
+
+
+
+
 
 
 }

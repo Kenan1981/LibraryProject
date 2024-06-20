@@ -1,4 +1,4 @@
-package com.tpe.entity.concretes.business;
+package com.tpe.entity.concretes.business; // checked
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tpe.entity.concretes.user.User;
@@ -25,13 +25,8 @@ public class Role {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @JsonIgnore // JSON üretimi sırasında bu alanı göz ardı etmek için
+    @OneToMany(mappedBy = "role")
     private List<User> users;
 
     @Enumerated(EnumType.STRING)
