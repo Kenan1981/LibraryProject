@@ -1,4 +1,4 @@
-package com.tpe.entity.concretes.user;
+package com.tpe.entity.concretes.user; // checked
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -76,8 +76,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Loan> loans;
 
-    @OneToOne
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private Role role;
 
 

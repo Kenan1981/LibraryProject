@@ -44,27 +44,27 @@ public class ErrorMessages {
 
 
 
-    // --  ASLIHAN
+    // 47 --  ASLIHAN
+
+    public static final String BOOK_ALREADY_EXIST_WITH_BOOK_NAME = "";
+    public static final String BOOK_NOT_FOUND_MESSAGE ="" ;
+    public static final String ROLE_NOT_FOUND = "";
+    public static final String ALREADY_REGISTER_MESSAGE_PHONE ="" ;
+    public static final String ALREADY_REGISTER_MESSAGE_EMAIL = " ";
+    public static final String TIME_NOT_VALID_MESSAGE = "";
+    public static final String NOT_FOUND_PUBLISHER_ID = "" ;
+    public static final String PUBLISHER_ALREADY_EXIST_WITH_NAME = "";
+    public static final String AUTHOR_ALREADY_EXIST_WITH_BOOK_NAME = "";
+    public static final String AUTHOR_NOT_FOUND_MESSAGE = "";
+    public static final String NOT_FOUND_USER_MESSAGE = "" ;
+    public static final String NOT_PERMITTED_METHOD_MESSAGE = "";
+    public static final String NOT_FOUND_LOAN_MESSAGE = "" ;
+    public static final String PUBLISHER_EXISTS_MESSAGE = "";
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // --  GOKHAN
+    // 67 --  GOKHAN
 
 
 

@@ -1,4 +1,4 @@
-package com.tpe.entity.concretes.business;
+package com.tpe.entity.concretes.business; // checked
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,12 +25,12 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name can not be white space")
     @NotNull(message = "Name can not be null")
     @Size(min = 4, max=70, message = "Name '${valudatedValue}' must be between {min} and {max} chars")
     private String name;
 
-    @Column(nullable = false)
+
+    @NotNull
     private Boolean builtIn = false;
 
 
