@@ -1,4 +1,4 @@
-package com.tpe.service;
+package com.tpe.service.business;
 
 import com.tpe.payload.request.SigninRequest;
 import com.tpe.payload.response.AuthResponse;

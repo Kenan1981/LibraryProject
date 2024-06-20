@@ -1,6 +1,7 @@
 package com.tpe.entity.concretes.business;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.tpe.entity.concretes.business.Publisher;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;

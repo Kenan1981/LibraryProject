@@ -1,14 +1,11 @@
 package com.tpe.entity.concretes.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tpe.entity.concretes.business.Loan;
 import com.tpe.entity.concretes.business.Role;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
+
+import com.tpe.entity.enums.RoleType;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -23,6 +20,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @EqualsAndHashCode(of = "id")
+
 public class User {
 
     @Id
