@@ -1,9 +1,8 @@
 package com.tpe.entity.concretes.user; // checked
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tpe.entity.concretes.business.Loan;
 import com.tpe.entity.concretes.business.Role;
+import com.tpe.entity.enums.RoleType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -12,6 +11,7 @@ import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -53,9 +53,8 @@ public class User {
     @Pattern(regexp = "\\d{3} \\d{3} \\d{4}")
     private String phone;
 
-    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy MM dd")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @NotNull
     @Email
@@ -77,12 +76,10 @@ public class User {
     private List<Loan> loans;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @JoinColumn(name = "role_id")
     private Role role;
 
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
 }

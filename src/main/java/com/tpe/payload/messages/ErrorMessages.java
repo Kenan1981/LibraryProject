@@ -55,8 +55,8 @@ public class ErrorMessages {
     public static final String NOT_FOUND_PUBLISHER_ID = "" ;
     public static final String PUBLISHER_ALREADY_EXIST_WITH_NAME = "";
     public static final String AUTHOR_ALREADY_EXIST_WITH_BOOK_NAME = "";
-    public static final String AUTHOR_NOT_FOUND_MESSAGE = "";
-    public static final String NOT_FOUND_USER_MESSAGE = "" ;
+    //public static final String AUTHOR_NOT_FOUND_MESSAGE = "";
+    public static final String NOT_FOUND_USER_MESSAGE = "User is not found by email" ;
     public static final String NOT_PERMITTED_METHOD_MESSAGE = "";
     public static final String NOT_FOUND_LOAN_MESSAGE = "" ;
     public static final String PUBLISHER_EXISTS_MESSAGE = "";
@@ -85,10 +85,10 @@ public class ErrorMessages {
 
 
     // --  BUSRA
+    public static final String AUTHOR_ALREADY_EXIST_WITH_LESSON_NAME= "Author with Author name %s is already exist";
+    public static final String AUTHOR_NOT_FOUND_MESSAGE = "Error: Author with id %s not found" ;
 
-
-
-
+    public static final String NOT_FOUND_AUTHOR_MESSAGE= "Error: Author with this field %s not found";
 
 
 
