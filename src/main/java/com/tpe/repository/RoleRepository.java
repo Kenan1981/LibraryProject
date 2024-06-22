@@ -1,7 +1,7 @@
 package com.tpe.repository;
 
 
-import com.tpe.entity.concretes.business.Role;
+import com.tpe.entity.concretes.user.Role;
 import com.tpe.entity.enums.RoleType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package com.tpe.service;
+package com.tpe.service.business;
 
 import com.tpe.entity.concretes.business.Author;
 import com.tpe.exception.ConflictException;
@@ -10,7 +10,7 @@ import com.tpe.payload.request.AuthorRequest;
 import com.tpe.payload.response.AuthorResponse;
 import com.tpe.payload.response.ResponseMessage;
 import com.tpe.repository.AuthorRepository;
-import com.tpe.service.helper.PageableHelper;
+import com.tpe.payload.helper.PageableHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

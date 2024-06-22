@@ -1,9 +1,9 @@
-package com.tpe.controller; // checked
+package com.tpe.controller.business; // checked
 
 import com.tpe.payload.request.AuthorRequest;
 import com.tpe.payload.response.AuthorResponse;
 import com.tpe.payload.response.ResponseMessage;
-import com.tpe.service.AuthorService;
+import com.tpe.service.business.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;

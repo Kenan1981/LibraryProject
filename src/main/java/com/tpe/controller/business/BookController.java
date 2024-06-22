@@ -1,9 +1,9 @@
-package com.tpe.controller;
+package com.tpe.controller.business;
 
 import com.tpe.payload.request.BookRequest;
 import com.tpe.payload.response.BookResponse;
 import com.tpe.payload.response.ResponseMessage;
-import com.tpe.service.BookService;
+import com.tpe.service.business.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
