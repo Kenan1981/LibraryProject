@@ -1,4 +1,4 @@
-package com.tpe.service;
+package com.tpe.service.business;
 
 import com.tpe.entity.concretes.business.Category;
 import com.tpe.exception.ConflictException;

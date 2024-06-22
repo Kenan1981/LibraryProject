@@ -1,7 +1,7 @@
-package com.tpe.service;
+package com.tpe.service.user;
 
 
-import com.tpe.entity.concretes.business.Role;
+import com.tpe.entity.concretes.user.Role;
 import com.tpe.entity.enums.RoleType;
 import com.tpe.exception.ResourceNotFoundException;
 import com.tpe.payload.messages.ErrorMessages;

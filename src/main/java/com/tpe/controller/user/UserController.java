@@ -1,12 +1,12 @@
-package com.tpe.controller;
+package com.tpe.controller.user; // checked
 
-import com.tpe.entity.concretes.business.Role;
+import com.tpe.entity.concretes.user.Role;
 import com.tpe.entity.concretes.user.User;
 import com.tpe.payload.request.UserRequest;
 import com.tpe.payload.response.ResponseMessage;
 import com.tpe.payload.response.UserResponse;
-import com.tpe.service.LoanService;
-import com.tpe.service.UserService;
+import com.tpe.service.business.LoanService;
+import com.tpe.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 
@@ -35,8 +35,24 @@ public class UserController {
         return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
     }
 
+    //create user
+    @PostMapping("/create/{userRole}") // http://localhost:8080/users  + JSON + POST
+    @PreAuthorize("hasAnyAuthority('ADMIN','EMPLOYEE')")
+    public ResponseEntity<User> createUser(@RequestBody UserRequest userRequest, Authentication authentication) {
+        Role creatorRole = (Role) authentication.getPrincipal();
+        User createdUser = userService.createUser(userRequest, creatorRole.getRoleType());
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/saveAdmin/{role}") // http://localhost:8080/user/save/Admin  + JSON + POST
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    public ResponseEntity<ResponseMessage<UserResponse>> saveUser(@RequestBody @Valid UserRequest userRequest,
+                                                                  @PathVariable String role){
+        return ResponseEntity.ok(userService.saveUser(userRequest, role));
+    }
+
     //authenticate user
-    @PostMapping("/user") // http://localhost:8080/user  + JSON + POST
+    @PostMapping("/authenticate") // http://localhost:8080/authenticate  + JSON + POST
     @PreAuthorize("hasAnyAuthority('ADMIN','MEMBER','EMPLOYEE')")
     public ResponseEntity<User> getAuthenticatedUser(Principal principal) {
         User authenticatedUser = userService.getAuthenticatedUser(principal.getName());
@@ -58,7 +74,7 @@ public class UserController {
 //    }
 
     //get users
-    @GetMapping("/users") // http://localhost:8080/users?page=1&size=10&sort=createDate&type=desc
+    @GetMapping("/getByPage") // http://localhost:8080/getByPage?page=1&size=10&sort=createDate&type=desc
     @PreAuthorize("hasAnyAuthority('ADMIN','EMPLOYEE')")
     public ResponseEntity<Page<UserResponse>> getUsersByPage(
             @PathVariable String userRole,
@@ -78,14 +94,6 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
-    //create user
-    @PostMapping("/users/{userRole}") // http://localhost:8080/users  + JSON + POST
-    @PreAuthorize("hasAnyAuthority('ADMIN','EMPLOYEE')")
-    public ResponseEntity<User> createUser(@RequestBody UserRequest userRequest, Authentication authentication) {
-        Role creatorRole = (Role) authentication.getPrincipal();
-        User createdUser = userService.createUser(userRequest, creatorRole.getRoleType());
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-    }
 
 
     //update user

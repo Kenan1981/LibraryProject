@@ -1,9 +1,9 @@
-package com.tpe.controller;
+package com.tpe.controller.business;
 
 import com.tpe.payload.request.CategoryRequest;
 import com.tpe.payload.response.CategoryResponse;
 import com.tpe.payload.response.ResponseMessage;
-import com.tpe.service.CategoryService;
+import com.tpe.service.business.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;

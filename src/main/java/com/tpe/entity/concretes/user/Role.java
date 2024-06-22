@@ -1,4 +1,4 @@
-package com.tpe.entity.concretes.business; // checked
+package com.tpe.entity.concretes.user; // checked
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tpe.entity.concretes.user.User;

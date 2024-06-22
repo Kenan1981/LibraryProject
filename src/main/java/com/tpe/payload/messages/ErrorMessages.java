@@ -26,7 +26,7 @@ public class ErrorMessages {
 
     // --  SERDAR
 
-
+    public static final String LOAN_ALREADY_EXIST = "Error: Loan already exist";
 
 
 
@@ -51,7 +51,7 @@ public class ErrorMessages {
     public static final String ROLE_NOT_FOUND = "";
     public static final String ALREADY_REGISTER_MESSAGE_PHONE ="" ;
     public static final String ALREADY_REGISTER_MESSAGE_EMAIL = " ";
-    public static final String TIME_NOT_VALID_MESSAGE = "";
+    public static final String BOOK_NOT_LOANABLE_MESSAGE = "Book is not loanable";
     public static final String NOT_FOUND_PUBLISHER_ID = "" ;
     public static final String PUBLISHER_ALREADY_EXIST_WITH_NAME = "";
     public static final String AUTHOR_ALREADY_EXIST_WITH_BOOK_NAME = "";

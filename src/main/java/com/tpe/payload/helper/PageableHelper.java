@@ -1,4 +1,4 @@
-package com.tpe.service.helper;
+package com.tpe.payload.helper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;

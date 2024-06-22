@@ -24,7 +24,7 @@ public class SuccessMessages {
 
     // --  SERDAR
 
-
+    public static final String LOAN_CREATED = "Loan details retrieved successfully";
 
 
 

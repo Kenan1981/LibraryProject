@@ -1,4 +1,4 @@
-package com.tpe.service;
+package com.tpe.service.user; // checked
 
 
 import com.tpe.entity.concretes.user.User;
@@ -14,9 +14,9 @@ import com.tpe.payload.response.ResponseMessage;
 import com.tpe.payload.response.UserResponse;
 import com.tpe.repository.LoanRepository;
 import com.tpe.repository.UserRepository;
-import com.tpe.service.helper.MethodHelper;
-import com.tpe.service.helper.PageableHelper;
-import com.tpe.service.helper.UniquePropertyValidator;
+import com.tpe.payload.helper.MethodHelper;
+import com.tpe.payload.helper.PageableHelper;
+import com.tpe.payload.helper.UniquePropertyValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -178,21 +178,21 @@ public class UserService {
         return userRepository.countAdmin(RoleType.ADMIN);
     }
 
-    public ResponseMessage<UserResponse> saveUser(UserRequest userRequest, String userRole) {
+    public ResponseMessage<UserResponse> saveUser(UserRequest userRequest, String role) {
 
         //!!! email -  phoneNumber unique mi kontrolu ??
         uniquePropertyValidator.checkDuplicate(userRequest.getEmail(),userRequest.getPhone());
         //!!! DTO --> POJO
         User user = userMapper.mapUserRequestToUser(userRequest);
         // !!! Rol bilgisi setleniyor
-        if(userRole.equalsIgnoreCase(RoleType.ADMIN.name())){
+        if(role.equalsIgnoreCase(RoleType.ADMIN.name())){
             if(Objects.equals(userRequest.getEmail(),"admin@admin.com")){
                 user.setBuiltIn(true);
             }
             user.setRole(roleService.getRole(RoleType.ADMIN));
-        } else if (userRole.equalsIgnoreCase("Employee")) {
+        } else if (role.equalsIgnoreCase("Employee")) {
             user.setRole(roleService.getRole(RoleType.EMPLOYEE));
-        } else if (userRole.equalsIgnoreCase("Member")) {
+        } else if (role.equalsIgnoreCase("Member")) {
             user.setRole(roleService.getRole(RoleType.MEMBER));
         }
         // !!! password encode ediliyor

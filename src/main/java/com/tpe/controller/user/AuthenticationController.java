@@ -1,8 +1,8 @@
-package com.tpe.controller;
+package com.tpe.controller.user;
 
 import com.tpe.payload.request.SigninRequest;
 import com.tpe.payload.response.AuthResponse;
-import com.tpe.service.AuthenticationService;
+import com.tpe.service.user.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

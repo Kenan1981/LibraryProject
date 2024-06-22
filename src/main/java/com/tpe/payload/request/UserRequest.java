@@ -1,6 +1,6 @@
 package com.tpe.payload.request;
 
-import com.tpe.entity.concretes.business.Role;
+import com.tpe.entity.concretes.user.Role;
 import com.tpe.entity.enums.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -49,7 +49,6 @@ public class UserRequest {
 
     @NotNull(message = "Role is mandatory")
     private RoleType roleType;
-
 
     private Role role;
 
