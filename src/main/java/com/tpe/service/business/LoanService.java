@@ -5,6 +5,7 @@ import com.tpe.entity.concretes.business.Book;
 import com.tpe.entity.concretes.business.Loan;
 import com.tpe.entity.concretes.user.User;
 import com.tpe.exception.ResourceNotFoundException;
+import com.tpe.payload.helper.MethodHelper;
 import com.tpe.payload.helper.PageableHelper;
 import com.tpe.payload.mappers.LoanMapper;
 import com.tpe.payload.messages.ErrorMessages;
@@ -37,6 +38,7 @@ public class LoanService {
     private final PageableHelper pageableHelper;
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+//    private final MethodHelper methodHelper;
 
 
     //1.GET
@@ -108,17 +110,18 @@ public class LoanService {
     // Gerekli bağımlılıklar burada tanımlanabilir
     // POST ===>
     public ResponseMessage<LoanResponse> createLoan(LoanRequest loanRequest) {
-    // Kullanıcı ve kitap bilgilerini alın
-    User user = userRepository.findById(loanRequest.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
-    Book book = bookRepository.findById(loanRequest.getBookId()).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
-    // Eğer kitap mevcut değilse
-    if (!book.isLoanable())
-    { return ResponseMessage.<LoanResponse>builder()
-            .message(ErrorMessages.BOOK_NOT_LOANABLE_MESSAGE)
-            .httpStatus(HttpStatus.BAD_REQUEST)
-            .build(); }
+        // Kullanıcı ve kitap bilgilerini alın
+        User user = userRepository.findById(loanRequest.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        Book book = bookRepository.findById(loanRequest.getBookId()).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
+        // Eğer kitap mevcut değilse
+        if (!book.isLoanable()) {
+            return ResponseMessage.<LoanResponse>builder()
+                    .message(ErrorMessages.BOOK_NOT_LOANABLE_MESSAGE)
+                    .httpStatus(HttpStatus.BAD_REQUEST)
+                    .build();
+        }
 
-    // Kullanıcının geri getirilmemiş ve iade tarihi geçmiş kitapları var mı kontrol edin
+        // Kullanıcının geri getirilmemiş ve iade tarihi geçmiş kitapları var mı kontrol edin
         if (loanRepository.existsByUserIdAndReturnDateIsNullAndExpireDateBefore(
                 loanRequest.getUserId(), LocalDateTime.now())) {
             return ResponseMessage.<LoanResponse>builder()
@@ -127,25 +130,42 @@ public class LoanService {
                     .build();
         }
 
-    // Kullanıcının puanına göre kitap alabileceği süreyi hesaplayın
-    int loanDays = user.getScore() * 7;
+//    // Kullanıcının puanına göre kitap alabileceği süreyi hesaplayın
+//    int loanDays = user.getScore() * 7;
+//
+//    // Örneğin, her puan 1 hafta anlamına geliyor
+//    LocalDateTime expireDate = LocalDateTime.now().plusDays(loanDays);
 
-    // Örneğin, her puan 1 hafta anlamına geliyor
-    LocalDateTime expireDate = LocalDateTime.now().plusDays(loanDays);
+        MethodHelper methodHelper = new MethodHelper();
+        methodHelper.setLoanDetails(user.getScore());
 
-    // Yeni bir loan oluşturun
-    Loan loan = new Loan();
-    loan.setUserId(loanRequest.getUserId());
-    loan.setBookId(loanRequest.getBookId()); loan.setNotes(loanRequest.getNotes());
-    loan.setExpireDate(expireDate); loan.setLoanable(false);
-    // Loan'u kaydedin
-    loanRepository.save(loan);
-    // Kitabı güncelleyin book.setAvailable(false);
-    bookRepository.save(book);
-    // Yanıt olarak Loan ve ilgili Book nesnelerini döndürün
-    LoanResponse loanResponse = new LoanResponse(loan, book);
-    return new ResponseMessage<>(loanResponse, "Loan created successfully"); }
 
+        // Yeni bir loan oluşturun
+//        Loan loan = new Loan();
+//        loan.setUserId(loanRequest.getUserId());
+//        loan.setBookId(loanRequest.getBookId());
+//        loan.setNotes(loanRequest.getNotes());
+//        loan.setLoanDate(LocalDateTime.now());
+//        loan.setExpireDate(LocalDateTime.now().plusDays(methodHelper.getLoanDays()));
+
+        //mapleme
+        Loan loan =loanMapper.mapLoanRequestToLoan(loanRequest);
+
+
+        // Loan'u kaydedin
+        loanRepository.save(loan);
+
+        // Kitabı güncelleyin book.setLoanable(false);
+        book.setLoanable(false);
+
+        // Yanıt olarak Loan ve ilgili Book nesnelerini döndürün
+
+        return ResponseMessage.<LoanResponse>builder()
+                .object(loanMapper.mapLoanToLoanResponse(loan))
+                .message(SuccessMessages.LOAN_CREATED)
+                .httpStatus(HttpStatus.CREATED)
+                .build();
+    }
 
 
     //PUT ==>>>
