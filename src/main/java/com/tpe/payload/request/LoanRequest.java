@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder(toBuilder = true)
 public class LoanRequest {
 
-    private Long id;
+
     private Long userId;
     private Long bookId;
     private LocalDateTime loanDate;

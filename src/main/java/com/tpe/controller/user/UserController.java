@@ -29,14 +29,14 @@ public class UserController {
     private final LoanService loanService;
 
     //register
-    @PostMapping("/register/{userRole}") // http://localhost:8080/register  + JSON + POST
+    @PostMapping("/register") // http://localhost:8080/register  + JSON + POST
     public ResponseEntity<User> registerUser(@RequestBody UserRequest userRequest) {
         User registeredUser = userService.registerUser(userRequest);
         return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
     }
 
     //create user
-    @PostMapping("/create/{userRole}") // http://localhost:8080/users  + JSON + POST
+    @PostMapping("/create") // http://localhost:8080/user/create/admin  + JSON + POST
     @PreAuthorize("hasAnyAuthority('ADMIN','EMPLOYEE')")
     public ResponseEntity<User> createUser(@RequestBody UserRequest userRequest, Authentication authentication) {
         Role creatorRole = (Role) authentication.getPrincipal();
